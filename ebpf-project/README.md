@@ -7,7 +7,7 @@ Historically, the operating system has always been an ideal place to implement o
 In this semester project bcc (BPF Compiler Collection) toolkit is being used.
 BCC tracing tools can be on next image:
 
-<center><a href="data/bcc_tracing_tools_2019.png"><img src="data/bcc_tracing_tools_2019.png" border=0 width=700></a></center>
+<center><a href="/data/bcc_tracing_tools_2019.png"><img src="/data/bcc_tracing_tools_2019.png" border=0 width=700></a></center>
 
 **Scripts:**
 
