@@ -1,0 +1,11 @@
+{
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "explorer.sortOrder": "type",
+  "editor.cursorBlinking": "smooth",
+  "files.trimFinalNewlines": true,
+  "editor.mouseWheelZoom": true,
+  "editor.stickyScroll.enabled": false,
+  "editor.detectIndentation": false
+}
