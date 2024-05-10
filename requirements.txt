@@ -1,3 +1,4 @@
 pydantic
 bcc
 pyelftools
+subprocess
