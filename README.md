@@ -22,7 +22,7 @@ To ensure compatibility and functionality, the project has been tested on Fedora
 Install BCC (BPF Compiler Collection) by running the following command in your terminal:
 
 ```bash
-sudo dnf install bcc
+sudo dnf install bcc python-devel
 ```
 
 This command will install the necessary dependencies and tools required for the eBPF project on Fedora Linux.

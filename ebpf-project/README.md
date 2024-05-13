@@ -12,3 +12,6 @@ BCC tracing tools can be on next image:
 **Scripts:**
 
 - users-command.py: Print what command is run by which user
+- vlan-learning.py: Learn VLANs on ethernet
+
+SchedCLS programs are attached to the peer of the networking interface of the containers on the host according to the filtering configuration.
