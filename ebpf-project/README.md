@@ -7,11 +7,11 @@ Historically, the operating system has always been an ideal place to implement o
 In this semester project bcc (BPF Compiler Collection) toolkit is being used.
 BCC tracing tools can be on next image:
 
-<center><a href="/data/bcc_tracing_tools_2019.png"><img src="/data/bcc_tracing_tools_2019.png" border=0 width=700></a></center>
+<a href="/data/bcc_tracing_tools_2019.png"><img src="/data/bcc_tracing_tools_2019.png" border="0" width="700"></a>
 
 **Scripts:**
 
-- users-command.py: Print what command is run by which user
-- xdp.py: XDP implementation for droping packets
+- users_command.py: Print what command is run by which user
+- xdp_drop_count.py: Count dropped packets by XDP
 
 SchedCLS programs are attached to the peer of the networking interface of the containers on the host according to the filtering configuration.
