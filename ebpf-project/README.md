@@ -13,5 +13,6 @@ BCC tracing tools can be on next image:
 
 - users_command.py: Print what command is run by which user
 - xdp_drop_count.py: Count dropped packets by XDP
+- filetop.py: Top for files, R/W by processes
 
 SchedCLS programs are attached to the peer of the networking interface of the containers on the host according to the filtering configuration.

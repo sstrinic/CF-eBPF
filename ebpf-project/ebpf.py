@@ -10,7 +10,7 @@ def run_script_in_terminal(script):
 
 if __name__ == "__main__":
     script_dir = "scripts/"
-    script_paths = ["users-command.py", "xdp.py"]
+    script_paths = ["users_command.py", "xdp_drop_count.py", "filetop.py"]
     script_paths = [script_dir + x for x in script_paths]
 
     for path in script_paths:
