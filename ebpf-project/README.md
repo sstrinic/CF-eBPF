@@ -11,8 +11,27 @@ BCC tracing tools can be on next image:
 
 **Scripts:**
 
-- users_command.py: Print what command is run by which user
+- users_command.py: Print what command is run by which user (uretprobe)
+- filetop.py: Top for files, R/W by processes (kprobe)
 - xdp_drop_count.py: Count dropped packets by XDP
-- filetop.py: Top for files, R/W by processes
 
 SchedCLS programs are attached to the peer of the networking interface of the containers on the host according to the filtering configuration.
+
+## Probes
+
+- **Kernel probes**
+    These give you dynamic access to internal components in the kernel.
+  - Kprobes
+  - Kretprobes
+- **Tracepoints**
+    These provide static access to internal components in the kernel.
+- **User-space probes**
+    These give you dynamic access to programs running in user-space.
+  - Uprobes
+  - Uretprobes
+- **User statically defined tracepoints(USDT)**
+    These allow static access to programs running in user-space.
+
+### XDP - eXpress Data Path
+
+It enables custom packet processing to be executed directly within the network driver, before the packets are passed to the kernel's networking stack.

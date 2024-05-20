@@ -210,6 +210,7 @@ while 1:
         call("clear")
     else:
         print()
+    print("filetop.py")
     with open(loadavg) as stats:
         print("%-8s loadavg: %s" % (strftime("%H:%M:%S"), stats.read()))
     print(

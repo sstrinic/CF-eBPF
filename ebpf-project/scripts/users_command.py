@@ -2,6 +2,7 @@ from elftools.elf.elffile import ELFFile
 from bcc import BPF
 from time import strftime
 import pwd
+import os
 
 
 # get user name from user ID
@@ -58,6 +59,8 @@ int printret(struct pt_regs *ctx) {
 
 b = BPF(text=bpf_text)
 b.attach_uretprobe(name=name, sym=sym, fn_name="printret")
+os.system("clear")
+print("users_command.py")
 print("%-9s %-7s %-10s %s" % ("TIME", "PID", "USER", "COMMAND"))
 
 

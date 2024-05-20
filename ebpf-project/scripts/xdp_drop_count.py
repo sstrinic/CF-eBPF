@@ -176,7 +176,7 @@ while 1:
             if val:
                 delta = val - prev[i]
                 prev[i] = val
-                print("{}: {} pkt/s".format(i, delta))
+                print("IP port-{}: {} pkt/s".format(i, delta))
         time.sleep(1)
     except KeyboardInterrupt:
         print("Removing filter from device")
