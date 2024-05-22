@@ -17,6 +17,8 @@ BCC tracing tools can be on next image:
 - tracepoint.py: Testing personal tracepoint code
 - opensnoop.bt: Trace open() syscalls (tracepoint)
 
+<a href="/data/eBPF_example_3_scripts.png"><img src="/data/eBPF_example_3_scripts.png" border="0" width="700"></a>
+
 SchedCLS programs are attached to the peer of the networking interface of the containers on the host according to the filtering configuration.
 
 ## Probes
