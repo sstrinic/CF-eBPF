@@ -14,8 +14,12 @@ This repository contains exercises and semester project for Computer Forensics c
 
 ## Setup
 
-For laboratory exercises, we utilize Jupyter notebooks, while for the semester project,
-we leverage BCC (BPF Compiler Collection) and bpftrace.
+For laboratory exercises, we utilized **Jupyter** notebooks, while for the semester project,
+**BCC** (BPF Compiler Collection) and **bpftrace** are used.  
+
+### Laboratory exercises
+
+TBD
 
 ### eBPF Project
 
@@ -27,4 +31,13 @@ sudo dnf install bcc bpftrace python-devel
 ```
 
 This command will install the necessary dependencies and tools required for the eBPF project on Fedora Linux.
-If you want to test project on other Linux distors, you should find proper way to setup bcc on your Linux distro.
+If you want to test project on other Linux distors, you should find proper way to setup bcc and bpftrace on your Linux distro.
+
+## Execution
+
+For running scripts first change dir to ebpf-project with:  
+`cd ebpf-project/`  
+To run the code for bcc scripts use:  
+`sudo python3 ebpf.py`  
+To run the code for bpftrace scripts use:  
+`sudo bpftrace bpftrace/test.bt`

@@ -1,7 +1,13 @@
+// interval:seconds:1
 i:s:1 {
   unroll(3) {
     print("Unrolled")
   }
+}
+
+// Wildcard usage
+kprobe:tcp_reset,kprobe:*socket* {
+  printf("Entered: %s\n", probe);
 }
 
 kprobe:arp_create {
