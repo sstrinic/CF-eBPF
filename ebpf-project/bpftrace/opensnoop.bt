@@ -1,5 +1,7 @@
 #!/usr/bin/env bpftrace
 /*
+ * Script modified with comments and small code changes. sstrinic
+ *
  * opensnoop	Trace open() syscalls.
  *		For Linux, uses bpftrace and eBPF.
  *
@@ -21,12 +23,16 @@ BEGIN
 	printf("%-6s %-16s %4s %3s %s\n", "PID", "COMM", "FD", "ERR", "PATH");
 }
 
+// Attach to the tracepoints
 tracepoint:syscalls:sys_enter_open,
 tracepoint:syscalls:sys_enter_openat
 {
+    // Save filename in associative array 
 	@filename[tid] = args.filename;
 }
 
+// Attach to the tracepoints
+// Only execute the block if there is an entry of tid in array
 tracepoint:syscalls:sys_exit_open,
 tracepoint:syscalls:sys_exit_openat
 /@filename[tid]/
@@ -42,5 +48,7 @@ tracepoint:syscalls:sys_exit_openat
 
 END
 {
+    // Clear array
+    print("\nEXITING...");
 	clear(@filename);
 }

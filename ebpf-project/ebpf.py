@@ -32,6 +32,7 @@ if __name__ == "__main__":
     subprocess.run(["tmux", "split-window", "-v"])
     subprocess.run(["tmux", "select-pane", "-t", "0"])
     subprocess.run(["tmux", "split-window", "-v"])
+    subprocess.run(["tmux", "select-pane", "-t", "3"])
 
     for i, script in enumerate(script_paths):
         run_script_in_tmux_pane(i, script)

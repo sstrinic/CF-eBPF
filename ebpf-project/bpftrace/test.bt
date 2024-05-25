@@ -1,0 +1,11 @@
+i:s:1 {
+  unroll(3) {
+    print("Unrolled")
+  }
+}
+
+kprobe:arp_create {
+  $stack_arg0 = *(uint8*)(reg("sp") + 8);
+  $stack_arg1 = *(uint8*)(reg("sp") + 16);
+  printf("SRC %s, DST %s\n", macaddr($stack_arg0), macaddr($stack_arg1));
+}

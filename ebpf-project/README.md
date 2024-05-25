@@ -42,3 +42,17 @@ SchedCLS programs are attached to the peer of the networking interface of the co
 ## XDP - eXpress Data Path
 
 It enables custom packet processing to be executed directly within the network driver, before the packets are passed to the kernel's networking stack.
+
+## Bpftrace
+
+The bpftrace (bt) language is inspired by the D language used by dtrace and uses the same program structure. Each script consists of a preamble and one or more action blocks. Preprocessor and type definitions take place in the preamble.[[2]](https://github.com/bpftrace/bpftrace/blob/master/man/adoc/bpftrace.adoc)  
+Action block structure:
+
+```D
+probe[,probe]
+/predicate/ {
+  action
+}
+```
+
+The predicate is an optional condition that must be met for the action to be executed.
