@@ -13,10 +13,14 @@ kprobe:tcp_reset, kprobe:acpi_thermal* {
 kprobe:arp_create {
   $sip = arg4;
   $dip = arg2;
-  $smac = sarg0;
-  $dmac = sarg1;
+  $smac = sarg0; // arg6
+  $dmac = sarg1; // arg5
   time("%H:%M:%S ");
   printf("SRC: %16s %s", ntop($sip), macaddr($smac));
   printf(" -> DST: %16s %s\n", ntop($dip), macaddr($dmac));
-  printf("\n%s- %s- %s\n", macaddr(sarg0), macaddr(sarg1), ntop(sarg2));
+}
+
+// TBD: Create uprobe for other elf
+uprobe:/bin/bash:readline { 
+    printf("arg0: %d\n", arg0); 
 }

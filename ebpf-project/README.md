@@ -65,3 +65,23 @@ sudo bpftrace -l
 sudo bpftrace -l "rawtracepoint:*" | wc -l
 sudo bpftrace -l 'kprobe:*'
 ```
+
+## Example of digging in kernel - bpftrace + kprobe
+
+Inside kernel definition of **arp_create**, located in arp.h:
+
+<a href="/data/arp_create.png"><img src="/data/arp_create.png" border="0" width="400"></a>
+
+Implementation inside test.bt or argN to:
+
+```D
+kprobe:arp_create {
+  $sip = arg4;
+  $dip = arg2;
+  $smac = sarg0; // arg6
+  $dmac = sarg1; // arg5
+  time("%H:%M:%S ");
+  printf("SRC: %16s %s", ntop($sip), macaddr($smac));
+  printf(" -> DST: %16s %s\n", ntop($dip), macaddr($dmac));
+}
+```
