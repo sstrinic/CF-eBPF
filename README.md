@@ -28,6 +28,7 @@ Install BCC (BPF Compiler Collection) and bpftrace by running the following comm
 
 ```bash
 sudo dnf install bcc bpftrace python-devel
+sudo pip3 install -r requirements.txt
 ```
 
 This command will install the necessary dependencies and tools required for the eBPF project on Fedora Linux.
@@ -38,6 +39,6 @@ If you want to test project on other Linux distors, you should find proper way t
 For running scripts first change dir to ebpf-project with:  
 `cd ebpf-project/`  
 To run the code for bcc scripts use:  
-`sudo python3 ebpf.py`  
+`sudo python3 bcc.py`  
 To run the code for bpftrace scripts use:  
-`sudo bpftrace bpftrace/test.bt`
+`sudo python3 bpftrace.py`

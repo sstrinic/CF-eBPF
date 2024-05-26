@@ -5,8 +5,6 @@
  * opensnoop	Trace open() syscalls.
  *		For Linux, uses bpftrace and eBPF.
  *
- * Also a basic example of bpftrace.
- *
  * USAGE: opensnoop.bt
  *
  * This is a bpftrace version of the bcc tool of the same name.
@@ -37,6 +35,7 @@ tracepoint:syscalls:sys_exit_open,
 tracepoint:syscalls:sys_exit_openat
 /@filename[tid]/
 {
+    // ret = return value of syscall
 	$ret = args.ret;
 	$fd = $ret >= 0 ? $ret : -1;
 	$errno = $ret >= 0 ? 0 : - $ret;

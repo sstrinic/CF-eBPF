@@ -25,7 +25,7 @@ if __name__ == "__main__":
             print(f"Script '{path}' does not exist. Exiting.")
             sys.exit(1)
 
-    subprocess.run(["tmux", "new-session", "-d", "-s", "ebpf-session"])
+    subprocess.run(["tmux", "new-session", "-d", "-s", "bcc-session"])
 
     # Split the tmux window into 4 panes
     subprocess.run(["tmux", "split-window", "-h"])
@@ -38,4 +38,4 @@ if __name__ == "__main__":
         run_script_in_tmux_pane(i, script)
         time.sleep(1)
 
-    subprocess.run(["tmux", "attach", "-t", "ebpf-session"])
+    subprocess.run(["tmux", "attach", "-t", "bcc-session"])

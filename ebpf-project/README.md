@@ -31,7 +31,6 @@ SchedCLS programs are attached to the peer of the networking interface of the co
     These provide static access to internal components in the kernel.  
   - tracepoint
   - rawtracepoint  
-    `sudo bpftrace -l "rawtracepoint:*" | wc -l`
 - **User-space probes**
     These give you dynamic access to programs running in user-space.
   - uprobes
@@ -56,3 +55,13 @@ probe[,probe]
 ```
 
 The predicate is an optional condition that must be met for the action to be executed.
+
+## List probes & tracepoints
+
+```bash
+sudo perf list
+cat /sys/kernel/debug/tracing/available_events
+sudo bpftrace -l
+sudo bpftrace -l "rawtracepoint:*" | wc -l
+sudo bpftrace -l 'kprobe:*'
+```

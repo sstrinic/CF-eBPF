@@ -1,17 +1,22 @@
-// interval:seconds:1
-i:s:1 {
-  unroll(3) {
-    print("Unrolled")
-  }
+// interval:seconds:10
+i:s:10 {
+    unroll(3) {
+        print("Triple double!")
+    }
 }
 
 // Wildcard usage
-kprobe:tcp_reset,kprobe:*socket* {
-  printf("Entered: %s\n", probe);
+kprobe:tcp_reset, kprobe:acpi_thermal* {
+    printf("Entered: %s\n", probe);
 }
 
 kprobe:arp_create {
-  $stack_arg0 = *(uint8*)(reg("sp") + 8);
-  $stack_arg1 = *(uint8*)(reg("sp") + 16);
-  printf("SRC %s, DST %s\n", macaddr($stack_arg0), macaddr($stack_arg1));
+  $sip = arg4;
+  $dip = arg2;
+  $smac = sarg0;
+  $dmac = sarg1;
+  time("%H:%M:%S ");
+  printf("SRC: %16s %s", ntop($sip), macaddr($smac));
+  printf(" -> DST: %16s %s\n", ntop($dip), macaddr($dmac));
+  printf("\n%s- %s- %s\n", macaddr(sarg0), macaddr(sarg1), ntop(sarg2));
 }
