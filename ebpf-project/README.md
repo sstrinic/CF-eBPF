@@ -70,7 +70,7 @@ sudo bpftrace -l 'kprobe:*'
 
 Inside kernel definition of **arp_create**, located in arp.h:
 
-<a href="/data/arp_create.png"><img src="/data/arp_create.png" border="0" width="400"></a>
+<a href="/data/arp_create.png"><img src="/data/arp_create.png" border="0" width="500"></a>
 
 Implementation inside test.bt or argN to:
 
@@ -86,4 +86,10 @@ kprobe:arp_create {
 }
 ```
 
-`readelf -Ws /bin/bash`
+## Other
+
+Inspect ELF files with: `readelf -Ws /bin/bash`  
+
+<a href="/data/sys_enter_read.png"><img src="/data/sys_enter_read.png" border="0" width="500"></a>  
+<a href="/data/sys_exit_read.png"><img src="/data/sys_exit_read.png" border="0" width="500"></a>  
+<a href="/data/sys_mkdir.png"><img src="/data/sys_mkdir.png" border="0" width="500"></a>  

@@ -1,5 +1,5 @@
 // interval:seconds:10
-i:s:10 {
+i:s:20 {
     unroll(3) {
         print("Triple double!")
     }
@@ -7,7 +7,7 @@ i:s:10 {
 
 // Wildcard usage
 kprobe:tcp_reset, kprobe:acpi_thermal* {
-    printf("Entered: %s\n", probe);
+    printf("Entered: %s\n", probe);  // Print used probe
 }
 
 kprobe:arp_create {
@@ -18,13 +18,4 @@ kprobe:arp_create {
   time("%H:%M:%S ");
   printf("SRC: %16s %s", ntop($sip), macaddr($smac));
   printf(" -> DST: %16s %s\n", ntop($dip), macaddr($dmac));
-}
-
-// TBD: Create uprobe for other elf
-uretprobe:/bin/bash:readline_internal_char { 
-    printf("arg0:  %s", probe);
-}
-
-tracepoint:syscalls:sys_enter_mkdir {
-    printf("PID: %d COMM: %s DIR: %s\n", pid, comm, str(args->pathname));
 }

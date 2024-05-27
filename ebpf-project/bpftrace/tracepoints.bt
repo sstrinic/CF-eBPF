@@ -1,0 +1,29 @@
+tracepoint:syscalls:sys_enter_mkdir
+{
+    printf("PID: %6d COMM: %18s DIR: %s\n", pid, comm, str(args->pathname));
+}
+
+tracepoint:syscalls:sys_enter_read
+/comm == "bash"/
+{
+    @buf[tid] = args->buf;  // Save buffer pointer for current thread in map variable
+    @fd = args->fd;  // Save fd to map
+}
+
+tracepoint:syscalls:sys_exit_read
+/comm == "bash"/
+{
+    if (@fd == 0) { // Data is read
+        printf("Characters read: %s\n", str(@buf[tid]));
+    }
+    delete(@buf[tid]);
+}
+
+END
+{
+    // Clear array
+    print("\nEXITING...");
+	clear(@buf);
+}
+
+// Create character frequency usage map
