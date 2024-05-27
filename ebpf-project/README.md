@@ -85,3 +85,5 @@ kprobe:arp_create {
   printf(" -> DST: %16s %s\n", ntop($dip), macaddr($dmac));
 }
 ```
+
+`readelf -Ws /bin/bash`

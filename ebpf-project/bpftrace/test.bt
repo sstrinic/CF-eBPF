@@ -21,6 +21,10 @@ kprobe:arp_create {
 }
 
 // TBD: Create uprobe for other elf
-uprobe:/bin/bash:readline { 
-    printf("arg0: %d\n", arg0); 
+uretprobe:/bin/bash:readline_internal_char { 
+    printf("arg0:  %s", probe);
+}
+
+tracepoint:syscalls:sys_enter_mkdir {
+    printf("PID: %d COMM: %s DIR: %s\n", pid, comm, str(args->pathname));
 }
