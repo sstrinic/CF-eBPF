@@ -12,7 +12,7 @@ def run_script_in_tmux_pane(pane_id, script):
 
 if __name__ == "__main__":
     script_dir = "bpftrace/"
-    script_paths = ["opensnoop.bt", "test.bt"]
+    script_paths = ["opensnoop.bt", "tracepoints.bt"]
     script_paths = [script_dir + x for x in script_paths]
 
     for path in script_paths:
