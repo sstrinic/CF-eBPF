@@ -19,7 +19,16 @@ For laboratory exercises, we utilized **Jupyter** notebooks, while for the semes
 
 ### Laboratory exercises
 
-TBD
+Use following commands to setup environment and install Jupyter notebook:
+
+```bash
+python -m venv labs
+cd labs
+source bin/activate
+pip install jupyter
+```
+
+Jupyter notebook files have extension **.ipynb**.
 
 ### eBPF Project
 
