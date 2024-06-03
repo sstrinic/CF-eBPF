@@ -1,0 +1,77 @@
+#!/usr/bin/env bpftrace
+
+BEGIN
+{
+    @keymap[1] = "ESC";
+    @keymap[2] = "1";
+    @keymap[3] = "2";
+    @keymap[4] = "3";
+    @keymap[5] = "4";
+    @keymap[6] = "5";
+    @keymap[7] = "6";
+    @keymap[8] = "7";
+    @keymap[9] = "8";
+    @keymap[10] = "9";
+    @keymap[11] = "0";
+    @keymap[12] = "'";
+    @keymap[13] = "+";
+    @keymap[14] = "Backspace";
+    @keymap[30] = "a";
+    @keymap[31] = "s";
+    @keymap[32] = "d";
+    @keymap[33] = "f";
+    @keymap[34] = "g";
+    @keymap[35] = "h";
+    @keymap[36] = "j";
+    @keymap[37] = "k";
+    @keymap[38] = "l";
+    @keymap[39] = "č";
+    @keymap[40] = "ć";
+    @keymap[41] = "`";
+    @keymap[42] = "LeftShift";
+    @keymap[43] = "ž";
+    @keymap[44] = "y";
+    @keymap[45] = "x";
+    @keymap[46] = "c";
+    @keymap[47] = "v";
+    @keymap[48] = "b";
+    @keymap[49] = "n";
+    @keymap[50] = "m";
+    @keymap[51] = ",";
+    @keymap[52] = ".";
+    @keymap[53] = "-";
+    @keymap[54] = "RightShift";
+    @keymap[56] = "Alt";
+    @keymap[57] = "Space";
+    @keymap[58] = "CapsLock";
+}
+
+kprobe:input_event {
+    $dev = arg0;
+    $type = arg1;
+    $code = arg2;
+    $value = arg3;
+
+    // Filter only key press events
+    if ($type == 1 && $value == 1) {
+        $key = @keymap[$code];
+        if ($key != str(0)) {
+            printf("Key pressed: %s\n", $key);
+            @charCounterK[$key] = count();
+        } else {
+            printf("Unknown key pressed: %d\n", $code);
+            @charCounterN[$code] = count();
+        }
+    }
+}
+
+END
+{
+    printf("\nRecognized keys:\n");
+    print(@charCounterK, 10);
+    clear(@charCounterK);
+    printf("\nUnrecognized keys:\n");
+    print(@charCounterN, 10);
+    clear(@charCounterN);
+    clear(@keymap);
+}

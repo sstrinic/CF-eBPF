@@ -1,13 +1,8 @@
-// interval:seconds:10
-i:s:20 {
-    unroll(3) {
-        print("Triple double!")
-    }
-}
+#!/usr/bin/env bpftrace
 
-// Wildcard usage
-kprobe:tcp_reset, kprobe:acpi_thermal* {
-    printf("Entered: %s\n", probe);  // Print used probe
+BEGIN
+{
+    print("Following mkdir calls & arp_create kprobe...");
 }
 
 kprobe:arp_create {
@@ -18,4 +13,9 @@ kprobe:arp_create {
   time("%H:%M:%S ");
   printf("SRC: %16s %s", ntop($sip), macaddr($smac));
   printf(" -> DST: %16s %s\n", ntop($dip), macaddr($dmac));
+}
+
+tracepoint:syscalls:sys_enter_mkdir
+{
+    printf("PID: %6d COMM: %18s DIR: %s\n", pid, comm, str(args->pathname));
 }

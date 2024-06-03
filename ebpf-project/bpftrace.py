@@ -12,7 +12,7 @@ def run_script_in_tmux_pane(pane_id, script):
 
 if __name__ == "__main__":
     script_dir = "bpftrace/"
-    script_paths = ["opensnoop.bt", "tracepoints.bt"]
+    script_paths = ["opensnoop.bt", "others.bt", "key_pressed.bt"]
     script_paths = [script_dir + x for x in script_paths]
 
     for path in script_paths:
@@ -22,8 +22,12 @@ if __name__ == "__main__":
 
     subprocess.run(["tmux", "new-session", "-d", "-s", "bpftrace-session"])
 
-    # Split the tmux window into 2 panes
+    # Split the tmux window into 4 panes
     subprocess.run(["tmux", "split-window", "-h"])
+    subprocess.run(["tmux", "split-window", "-v"])
+    subprocess.run(["tmux", "select-pane", "-t", "0"])
+    subprocess.run(["tmux", "split-window", "-v"])
+    subprocess.run(["tmux", "select-pane", "-t", "3"])
 
     for i, script in enumerate(script_paths):
         run_script_in_tmux_pane(i, script)

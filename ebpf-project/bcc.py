@@ -11,7 +11,7 @@ def run_script_in_tmux_pane(pane_id, script):
 
 
 if __name__ == "__main__":
-    script_dir = "scripts/"
+    script_dir = "bcc/"
     script_paths = [
         "users_command.py",
         "xdp_drop_count.py wlp0s20f3",
