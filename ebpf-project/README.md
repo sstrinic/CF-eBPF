@@ -9,7 +9,7 @@ BCC tracing tools can be seen on next image:
 
 <a href="/data/bcc_tracing_tools_2019.png"><img src="/data/bcc_tracing_tools_2019.png" border="0" width="700"></a>
 
-**Python and bpftrace scripts:**
+## Python and bpftrace scripts
 
 - Python:
 
@@ -24,10 +24,12 @@ BCC tracing tools can be seen on next image:
   2. kprobes.bt: Examples of kprobes
   3. tracepoints.bt: Examples of tracepoints
 
-**Python scripts**
+### Python scripts  
+
 <a href="/data/python_scripts_ex.png"><img src="/data/python_scripts_ex.png" border="0" width="700"></a>
 
-**Bpftrace scripts**
+### Bpftrace scripts  
+
 <a href="/data/bpftrace_scripts_ex.png"><img src="/data/bpftrace_scripts_ex.png" border="0" width="700"></a>
 
 ## Probes
