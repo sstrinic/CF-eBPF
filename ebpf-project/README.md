@@ -24,7 +24,11 @@ BCC tracing tools can be seen on next image:
   2. kprobes.bt: Examples of kprobes
   3. tracepoints.bt: Examples of tracepoints
 
-<a href="/data/eBPF_example_3_scripts.png"><img src="/data/eBPF_example_3_scripts.png" border="0" width="700"></a>
+**Python scripts**
+<a href="/data/python_scripts_ex.png"><img src="/data/python_scripts_ex.png" border="0" width="700"></a>
+
+**Bpftrace scripts**
+<a href="/data/bpftrace_scripts_ex.png"><img src="/data/bpftrace_scripts_ex.png" border="0" width="700"></a>
 
 ## Probes
 

@@ -18,12 +18,10 @@ tracepoint:syscalls:sys_exit_read
     }
     delete(@buf[tid]);
 }
-
+// Create character frequency usage map
 END
 {
     // Clear array
     print("\nEXITING...");
 	clear(@buf);
 }
-
-// Create character frequency usage map
