@@ -7,9 +7,11 @@ Historically, the operating system has always been an ideal place to implement o
 In this semester project **bcc** (BPF Compiler Collection) toolkit and **bpftrace** are being used.
 BCC tracing tools can be seen on next image:
 
-<a href="/data/bcc_tracing_tools_2019.png"><img src="/data/bcc_tracing_tools_2019.png" border="0" width="700"></a>
+<a href="/data/bcc_tracing_tools_2019.png"><img src="/data/bcc_tracing_tools_2019.png" border="0" width="700" alt="BCC tracing tools"/></a>
 
 ## Python and bpftrace scripts
+
+### Python scripts example
 
 - Python:
 
@@ -18,36 +20,34 @@ BCC tracing tools can be seen on next image:
   3. xdp_drop_count.py: Count dropped packets by XDP
   4. tracepoint.py: Testing personal tracepoint code
 
+<a href="/data/python_scripts_ex.png"><img src="/data/python_scripts_ex.png" border="0" width="700" alt="Python scripts example"/></a>
+
+### Bpftrace scripts example
+
 - Bpftrace:
 
   1. opensnoop.bt: Trace open() syscalls (tracepoint)
-  2. kprobes.bt: Examples of kprobes
-  3. tracepoints.bt: Examples of tracepoints
+  2. key_pressed.bt: Prints which key is pressed and top 10 pressed after exiting
+  3. others.bt: Prints details of mkdir calls, IP and MAC addresses when ARP is sent
 
-### Python scripts  
-
-<a href="/data/python_scripts_ex.png"><img src="/data/python_scripts_ex.png" border="0" width="700"></a>
-
-### Bpftrace scripts  
-
-<a href="/data/bpftrace_scripts_ex.png"><img src="/data/bpftrace_scripts_ex.png" border="0" width="700"></a>
+<a href="/data/bpftrace_scripts_ex.png"><img src="/data/bpftrace_scripts_ex.png" border="0" width="700" alt="Bpftrace scripts example"/></a>
 
 ## Probes
 
-- **Kernel probes**
-    Dynamic access to internal components in the kernel.
+- **Kernel probes**  
+  Dynamic access to internal components in the kernel.
   - kprobes
   - kretprobes
-- **Tracepoints**
-    Static access to internal components in the kernel.  
+- **Tracepoints**  
+  Static access to internal components in the kernel.
   - tracepoint
-  - rawtracepoint  
-- **User-space probes**
-    Dynamic access to programs running in user-space.
+  - rawtracepoint
+- **User-space probes**  
+  Dynamic access to programs running in user-space.
   - uprobes
   - uretprobes
-- **User statically defined tracepoints(USDT)**
-    Static access to programs running in user-space.
+- **User statically defined tracepoints(USDT)**  
+  Static access to programs running in user-space.
 
 ### List probes & tracepoints
 
@@ -61,9 +61,9 @@ sudo bpftrace -l 'kprobe:*'
 
 ### Tracepoints formats
 
-<a href="/data/sys_enter_read.png"><img src="/data/sys_enter_read.png" border="0" width="500"></a>  
-<a href="/data/sys_exit_read.png"><img src="/data/sys_exit_read.png" border="0" width="500"></a>  
-<a href="/data/sys_mkdir.png"><img src="/data/sys_mkdir.png" border="0" width="500"></a>  
+<a href="/data/sys_enter_read.png"><img src="/data/sys_enter_read.png" border="0" width="500" alt="Sys enter read format"/></a>  
+<a href="/data/sys_exit_read.png"><img src="/data/sys_exit_read.png" border="0" width="500" alt="Sys exit read format"/></a>  
+<a href="/data/sys_mkdir.png"><img src="/data/sys_mkdir.png" border="0" width="500" alt="Sys mkdir format"/></a>
 
 ## Bpftrace
 
@@ -83,7 +83,7 @@ The predicate is an optional condition that must be met for the action to be exe
 
 Inside kernel definition of **arp_create**, located in arp.h:
 
-<a href="/data/arp_create.png"><img src="/data/arp_create.png" border="0" width="500"></a>
+<a href="/data/arp_create.png"><img src="/data/arp_create.png" border="0" width="500" alt="Arp create kernel"/></a>
 
 Implementation inside kprobes.bt for **arp_create** kprobe:
 
@@ -101,11 +101,13 @@ kprobe:arp_create {
 
 ## Other
 
-TBD  
+TBD
 
 ### XDP - eXpress Data Path
 
-Enables custom packet processing to be executed directly within the network driver, before the packets are passed to the kernel's networking stack.  
+Enables custom packet processing to be executed directly within the network driver, before the packets are passed to the kernel's networking stack.
+
+<a href="/data/xdp.png"><img src="/data/xdp.png" border="0" width="700" alt="XDP path"/></a>
 
 Inspect ELF files with: `readelf -Ws /bin/bash`  
 SchedCLS programs are attached to the peer of the networking interface of the containers on the host according to the filtering configuration.
