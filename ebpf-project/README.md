@@ -11,6 +11,24 @@ BCC tracing tools can be seen on next image:
 
 <a href="/images/bcc_tracing_tools_2019.png"><img src="/images/bcc_tracing_tools_2019.png" border="0" width="700" alt="BCC tracing tools"/></a>
 
+## Table of Contents
+
+- [eBPF project](#ebpf-project)
+  - [Table of Contents](#table-of-contents)
+  - [BCC \& bpftrace](#bcc--bpftrace)
+    - [BCC](#bcc)
+    - [Bpftrace](#bpftrace)
+  - [Probes](#probes)
+    - [List probes \& tracepoints](#list-probes--tracepoints)
+    - [Tracepoints formats](#tracepoints-formats)
+  - [Python and bpftrace scripts](#python-and-bpftrace-scripts)
+    - [Python script examples](#python-script-examples)
+    - [Bpftrace script examples](#bpftrace-script-examples)
+  - [Examples of working with kernel](#examples-of-working-with-kernel)
+    - [others.bt - arp\_create](#othersbt---arp_create)
+    - [key\_pressed.bt - input\_event](#key_pressedbt---input_event)
+  - [XDP - eXpress Data Path](#xdp---express-data-path)
+
 ## BCC & bpftrace
 
 ### BCC
