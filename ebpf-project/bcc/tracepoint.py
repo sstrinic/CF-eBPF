@@ -61,7 +61,12 @@ def event_printer(cpu, data, size):
 
 if __name__ == "__main__":
     b = BPF(text=bpf_text)
+
+    # Opens a perf buffer associated with the route_evt event
+    # and sets event_printer as the callback function to be called whenever an event is received.
     b["route_evt"].open_perf_buffer(event_printer)
 
+    # Continuously polls for events from the BPF perf buffers
+    # and processes them using the provided callback function.
     while True:
         b.kprobe_poll()

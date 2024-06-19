@@ -11,24 +11,27 @@ BCC tracing tools can be seen on next image:
 
 <a href="/images/bcc_tracing_tools_2019.png"><img src="/images/bcc_tracing_tools_2019.png" border="0" width="700" alt="BCC tracing tools"/></a>
 
-## Python and bpftrace scripts
+## BCC & bpftrace
 
-### Python scripts example
+### BCC
 
- 1. users_command.py: Print what command is run by which user (uretprobe)
- 2. filetop.py: Top for files, R/W by processes (kprobe)
- 3. xdp_drop_count.py: Count dropped packets by XDP
- 4. tracepoint.py: Testing personal tracepoint code
+BCC makes BPF programs easier to write, with kernel instrumentation in C (and includes a C wrapper around LLVM), and front-ends in Python and lua. It is suited for many tasks, including performance analysis and network traffic control.  
 
-<a href="/images/python_scripts_ex.png"><img src="/images/python_scripts_ex.png" border="0" width="700" alt="Python scripts example"/></a>
+Usual BCC program consists of C code inserted inside Python code. Examples can be seen in [bcc](bcc/) directory.
 
-### Bpftrace scripts example
+### Bpftrace
 
- 1. opensnoop.bt: Trace open() syscalls (tracepoint)
- 2. key_pressed.bt: Prints which key is pressed and top 10 pressed after exiting
- 3. others.bt: Prints details of mkdir calls, IP and MAC addresses when ARP is sent
+The bpftrace (bt) language is inspired by the D language used by dtrace and uses the same program structure. Each script consists of a preamble and one or more action blocks. Preprocessor and type definitions take place in the preamble.[[2]](https://github.com/bpftrace/bpftrace/blob/master/man/adoc/bpftrace.adoc)  
+Action block structure:
 
-<a href="/images/bpftrace_scripts_ex.png"><img src="/images/bpftrace_scripts_ex.png" border="0" width="700" alt="Bpftrace scripts example"/></a>
+```D
+probe[,probe]
+/predicate/ {
+  action
+}
+```
+
+The predicate is an optional condition that must be met for the action to be executed.
 
 ## Probes
 
@@ -63,27 +66,34 @@ sudo bpftrace -l 'kprobe:*'
 <a href="/images/sys_exit_read.png"><img src="/images/sys_exit_read.png" border="0" width="500" alt="Sys exit read format"/></a>  
 <a href="/images/sys_mkdir.png"><img src="/images/sys_mkdir.png" border="0" width="500" alt="Sys mkdir format"/></a>
 
-## Bpftrace
+## Python and bpftrace scripts
 
-The bpftrace (bt) language is inspired by the D language used by dtrace and uses the same program structure. Each script consists of a preamble and one or more action blocks. Preprocessor and type definitions take place in the preamble.[[2]](https://github.com/bpftrace/bpftrace/blob/master/man/adoc/bpftrace.adoc)  
-Action block structure:
+### Python script examples
 
-```D
-probe[,probe]
-/predicate/ {
-  action
-}
-```
+ 1. **users_command.py**: Print what command is run by which user (uretprobe)
+ 2. **filetop.py**: Top for files, R/W by processes (kprobe)
+ 3. **xdp_drop_count.py**: Count dropped packets by XDP
+ 4. **tracepoint.py**: Various network tracepoints
 
-The predicate is an optional condition that must be met for the action to be executed.
+<a href="/images/python_scripts_ex.png"><img src="/images/python_scripts_ex.png" border="0" width="700" alt="Python scripts example"/></a>
 
-## Example of digging in kernel - bpftrace + kprobe
+### Bpftrace script examples
+
+ 1. **opensnoop.bt**: Trace open() syscalls (tracepoint)
+ 2. **key_pressed.bt**: Prints which key is pressed and top 10 pressed after exiting
+ 3. **others.bt**: Prints details of mkdir calls, IP and MAC addresses when ARP is sent
+
+<a href="/images/bpftrace_scripts_ex.png"><img src="/images/bpftrace_scripts_ex.png" border="0" width="700" alt="Bpftrace scripts example"/></a>
+
+## Examples of working with kernel
+
+### others.bt - arp_create
 
 Inside kernel definition of **arp_create**, located in arp.h:
 
 <a href="/images/arp_create.png"><img src="/images/arp_create.png" border="0" width="500" alt="Arp create kernel"/></a>
 
-Implementation inside kprobes.bt for **arp_create** kprobe:
+Implementation inside others.bt for **arp_create** kprobe:
 
 ```D
 kprobe:arp_create {
@@ -96,6 +106,8 @@ kprobe:arp_create {
   printf(" -> DST: %16s %s\n", ntop($dip), macaddr($dmac));
 }
 ```
+
+### key_pressed.bt - input_event
 
 Kprobe input_event kernel code([link](https://github.com/torvalds/linux/blob/master/drivers/input/input.c)):
 
@@ -115,15 +127,22 @@ void input_event(struct input_dev *dev,
 EXPORT_SYMBOL(input_event);
 ```
 
-## Other
+Implementation inside key_pressed.bt, saving args inside local variable:
 
-TBD
+```D
+kprobe:input_event {
+    $dev = arg0;
+    $type = arg1;
+    $code = arg2;
+    $value = arg3;
+    ...
+}
+```
 
-### XDP - eXpress Data Path
+## XDP - eXpress Data Path
 
-Enables custom packet processing to be executed directly within the network driver, before the packets are passed to the kernel's networking stack.
+Express Data Path (XDP) is a high-performance packet processing framework within the Linux kernel, designed to allow network packets to be processed as they arrive at the network interface card (NIC), enabling extremely low-latency and high-throughput networking applications.
+Enables custom packet processing to be executed directly within the network driver, before the packets are passed to the kernel's networking stack.  
+One of the reasons why big companies like Amazon can survive huge DDOS attacks with less impact on services.
 
 <a href="/images/xdp.png"><img src="/images/xdp.png" border="0" width="700" alt="XDP path"/></a>
-
-Inspect ELF files with: `readelf -Ws /bin/bash`  
-SchedCLS programs are attached to the peer of the networking interface of the containers on the host according to the filtering configuration.
