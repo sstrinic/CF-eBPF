@@ -73,6 +73,7 @@ The predicate is an optional condition that must be met for the action to be exe
 ```bash
 sudo perf list
 cat /sys/kernel/debug/tracing/available_events
+cat /sys/kernel/debug/tracing/available_filter_functions
 sudo bpftrace -l
 sudo bpftrace -l "rawtracepoint:*" | wc -l
 sudo bpftrace -l 'kprobe:*'
